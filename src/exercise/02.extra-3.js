@@ -25,9 +25,9 @@ function App() {
   return <Greeting />
 }
 
-function useLocalStorageState(storageKey, initialName = '') {
+function useLocalStorageState(storageKey, defaultValue = '') {
   const [storageValue, setStorageValue] = useState(
-    () => window.localStorage.getItem(storageKey) || initialName,
+    () => window.localStorage.getItem(storageKey) || defaultValue,
   )
 
   useEffect(() => {
