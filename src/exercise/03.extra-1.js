@@ -23,7 +23,7 @@ function FavoriteAnimal({animal, onAnimalChange}) {
 }
 
 function Display({animal}) {
-  return <div>{`Hey, your favorite animal is: ${animal}!`}</div>
+  return <div>{`Your favorite animal is: ${animal}!`}</div>
 }
 
 function App() {
