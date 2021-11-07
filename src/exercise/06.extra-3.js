@@ -11,6 +11,7 @@ function PokemonInfo({pokemonName}) {
     error: null, 
     status: 'idle'
   })
+  const {pokemon, error, status} = state
   
   useEffect(() => {
     if (!pokemonName) {
@@ -32,18 +33,18 @@ function PokemonInfo({pokemonName}) {
     )
   }, [pokemonName])
   
-  if (state.status === 'idle') {
+  if (status === 'idle') {
     return 'Submit a pokemon'
   }
-  if (state.status === 'pending') {
+  if (status === 'pending') {
     return <PokemonInfoFallback name={pokemonName}/>
   }
-  if (state.status === 'rejected') {
+  if (status === 'rejected') {
     return (
-      <div role="alert">There was an error: <pre style={{whiteSpace: 'normal'}}>{state.error.message}</pre></div>)
+      <div role="alert">There was an error: <pre style={{whiteSpace: 'normal'}}>{error.message}</pre></div>)
   }
 
-  return <PokemonDataView pokemon={state.pokemon}/>
+  return <PokemonDataView pokemon={pokemon}/>
 }
 
 function App() {
