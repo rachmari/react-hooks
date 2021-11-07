@@ -31,15 +31,15 @@ function PokemonInfo({pokemonName}) {
   }, [pokemonName])
   
   if (status === 'idle') return 'Submit a pokemon'
-  if (status === 'pending') return 'Loading...'
+  if (status === 'pending') {
+    return <PokemonInfoFallback name={pokemonName}/>
+  }
   if (status === 'rejected') {
     return (
       <div role="alert">There was an error: <pre style={{whiteSpace: 'normal'}}>{error.message}</pre></div>)
   }
 
-  return pokemon 
-    ? <PokemonDataView pokemon={pokemon}/>
-    : <PokemonInfoFallback name={pokemonName}/>
+  return <PokemonDataView pokemon={pokemon}/>
 }
 
 function App() {

@@ -36,16 +36,14 @@ function PokemonInfo({pokemonName}) {
     return 'Submit a pokemon'
   }
   if (state.status === 'pending') {
-    return 'Loading...'
+    return <PokemonInfoFallback name={pokemonName}/>
   }
   if (state.status === 'rejected') {
     return (
       <div role="alert">There was an error: <pre style={{whiteSpace: 'normal'}}>{state.error.message}</pre></div>)
   }
 
-  return state.pokemon 
-    ? <PokemonDataView pokemon={state.pokemon}/>
-    : <PokemonInfoFallback name={pokemonName}/>
+  return <PokemonDataView pokemon={state.pokemon}/>
 }
 
 function App() {
