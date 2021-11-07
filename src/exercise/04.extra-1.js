@@ -1,11 +1,11 @@
 // useState: tic tac toe
 // http://localhost:3000/isolated/exercise/04.js
 
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 
 const initialSquares = Array(9).fill(null)
 function Board() {
-  const [squares, setSquares] = useState(initialSquares)
+  const [squares, setSquares] = useState(() => getInitialBoard())
   // - nextValue ('X' or 'O')
   const nextValue = calculateNextValue(squares)
   // - winner ('X', 'O', or null)
@@ -13,6 +13,19 @@ function Board() {
   // - status (`Winner: ${winner}`, `Scratch: Cat's game`, or `Next player: ${nextValue}`)
   const status = calculateStatus(winner, squares, nextValue)
 
+  useEffect(() => {
+    window.localStorage.setItem('board', squares.toString())
+  }, [squares])
+
+  function getInitialBoard() {
+    const localStorage = window.localStorage.getItem('board')
+    if (localStorage) {
+      return window.localStorage.getItem('board')
+      .split(',')
+      .map((elem) => ( elem === '' ? null : elem))
+    }
+    return initialSquares
+  }
   // This is the function your square click handler will call. `square` should
   // be an index. So if they click the center square, this will be `4`.
   function selectSquare(square) {
